@@ -138,7 +138,7 @@ else {
 	}
 	else {
         Write-Output "Attempting to install latest ${Extension}"
-        Invoke-RestMethod -Uri $siteExtensionManage -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -UserAgent $userAgent -Method PUT -Body $siteExtensionManageBody
+        Invoke-RestMethod -Uri $siteExtensionManage -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -UserAgent $userAgent -ContentType "application/json" -Method PUT -Body $siteExtensionManageBody
         Write-Output "[${SiteName}] Completed request to install latest of ${Extension}"
 	}
 }
