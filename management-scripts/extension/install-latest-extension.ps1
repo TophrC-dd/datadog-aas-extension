@@ -53,6 +53,7 @@ $userAgent = "powershell/1.0"
 
 $siteExtensionsBase="${baseApiUrl}/siteextensions"
 $siteExtensionManage="${baseApiUrl}/siteextensions/${Extension}"
+$siteExtensionManageBody = "{ 'id':'${Extension}'}"
 
 $siteApiUrl="https://management.azure.com/subscriptions/${SubscriptionId}/resourceGroups/${ResourceGroup}/providers/Microsoft.Web/sites/${SiteName}"
 
@@ -137,7 +138,7 @@ else {
 	}
 	else {
         Write-Output "Attempting to install latest ${Extension}"
-        Invoke-RestMethod -Uri $siteExtensionManage -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -UserAgent $userAgent -Method PUT
+        Invoke-RestMethod -Uri $siteExtensionManage -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -UserAgent $userAgent -Method PUT -Body $siteExtensionManageBody
         Write-Output "[${SiteName}] Completed request to install latest of ${Extension}"
 	}
 }
